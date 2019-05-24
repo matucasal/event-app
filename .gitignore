@@ -34,6 +34,8 @@ build/Release
 
 # Dependency directories
 node_modules/
+BACK_END/node_module
+FRONT_END/node_module
 jspm_packages/
 
 # TypeScript v1 declaration files
