@@ -7,27 +7,31 @@
     >
       <v-list dense>
           
-          <router-link :to="{name: 'FormEvent'}">
+          
             <v-list-tile>
                 <v-list-tile-action>
                     <v-icon>home</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
+                  <router-link :to="{name: 'FormEvent'}">
                     <v-list-tile-title>Formulario de eventos</v-list-tile-title>
+                  </router-link>
                 </v-list-tile-content>
             </v-list-tile>
-        </router-link>
+        
 
-        <router-link :to="{name: 'ListEvent'}">
+        
           <v-list-tile>
             <v-list-tile-action>
               <v-icon>contact_mail</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Listado de eventos</v-list-tile-title>
+              <router-link :to="{name: 'ListEvent'}">
+                <v-list-tile-title>Listado de eventos</v-list-tile-title>
+              </router-link>>
             </v-list-tile-content>
           </v-list-tile>
-        </router-link>>
+        
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
