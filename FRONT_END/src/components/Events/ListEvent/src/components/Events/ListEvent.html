@@ -1,5 +1,37 @@
+<template><h1>Estoy aca</h1>
 
-<section class="src-components-events-list-event">
-  <h1>Lista de eventos</h1>
-</section>
 
+  <v-container grid-list-xl>
+    <v-layout wrap>
+      <v-flex xs4
+        v-for="(item, id) in wholeResponse"
+        :key="id"
+        mb-2>
+        <v-card>
+          <v-img
+            :src="item.Poster"
+            aspect-ratio="1"
+          ></v-img>
+
+          <v-card-title primary-title>
+            <div>
+              <h2>{{item.title}}</h2>
+              <div>Year: {{item.completed}}</div>
+              <div>Type: {{item.id}}</div>
+            </div>
+          </v-card-title>
+
+          <v-card-actions class="justify-center">
+            <v-btn flat
+              color="green"
+              @click="singleEvent(item.imdbID)"
+              >View</v-btn>
+          </v-card-actions>
+
+        </v-card>
+      </v-flex>
+  </v-layout>
+  </v-container>
+
+
+</template>
