@@ -13,7 +13,7 @@ export default {
   },
 
   fetchSingleEvent (id) {
-    return axios.get('&id=' + id)
+    return axios.get('/' + id)
       .then(response => {
         return response.data
       })
