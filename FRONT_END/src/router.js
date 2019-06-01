@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 
+import Layout from "./components/Layout/index.vue";
+
 import Events from './components/Events/index.vue'
 import FormEvents from './components/Events/FormEvent/index.vue'
 import ListEvents from './components/Events/ListEvent/index.vue'
@@ -19,7 +21,10 @@ export default new VueRouter({
     //{path: '/formvue/:colorFondo/:colorTexto', component: FormularioVue, props: true},
     //{path: '/http/:colorFondo/:colorTexto', component: Http, props: true},
     //{path: '/contador', component: Contador}
-    {
+    {   path: '/layout',
+        components: Layout
+    }
+    ,{
         path: '/events',
         component: Events,
         children: [

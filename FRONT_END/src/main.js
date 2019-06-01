@@ -8,7 +8,8 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
+//axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
+axios.defaults.baseURL = 'https://localhost:8000'
 
 Vue.use(Vuetify);
 Vue.use(router);

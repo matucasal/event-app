@@ -12,6 +12,9 @@
         subheader
         dense
       >
+
+      <p>Name: {{ user.name }}</p>    
+      
         <v-subheader>Events</v-subheader>
         <v-list-tile>
             <v-list-tile-action>
@@ -90,12 +93,38 @@
 </template>
 
 <script>
+
+  import axios from "axios"    
+  import router from "../../router.js"   
+
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      user: {    
+        name: "matias"    
+      } 
     }),
     props: {
       source: String
-    }
+    },
+    methods: {    
+      getUserData: function() {    
+        let self = this    
+        axios.get("/api/user")    
+        .then((response) => {    
+          console.log(response)    
+          self.$set(this, "user", response.data.user)    
+        })    
+        .catch((errors) => {    
+          console.log(errors)    
+          router.push("/")    
+        })    
+      }    
+    },
+    mounted() {    
+      this.getUserData()    
+    }  
   }
+
+
 </script>

@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <div class="container">
-      <Layout></Layout>
-    </div>
+      <Login></Login>
   </div>
 </template>
 
 
 <script>
   import Layout from "./components/Layout/index.vue";
+  import Login from ".components/Login/index.vue"
   export default {
     name: "app",
     //Componentes que agrego
     components: {
-      Layout
+      Login
     }
   }
 </script>
