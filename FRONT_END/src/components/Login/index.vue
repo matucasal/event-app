@@ -17,8 +17,8 @@
         methods: {    
             login: (e) => {    
                 e.preventDefault()    
-                let email = "user@email.com"   
-                let password = "password"    
+                let email = "mcasal"   
+                let password = "123"    
                 let login = () => {    
                     let data = {    
                         email: email,    

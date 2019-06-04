@@ -9,7 +9,9 @@ import 'vuetify/dist/vuetify.min.css'
 Vue.config.productionTip = false;
 
 //axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
-axios.defaults.baseURL = 'https://localhost:8000'
+//axios.defaults.baseURL = 'https://localhost:8000'
+//xios.defaults.baseURL =  'http://localhost:5656/api'
+//login/user'
 
 Vue.use(Vuetify);
 Vue.use(router);
@@ -19,3 +21,11 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
+
+/*new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
+*/

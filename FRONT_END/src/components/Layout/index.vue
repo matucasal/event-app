@@ -1,4 +1,5 @@
 <template>
+
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
@@ -13,7 +14,7 @@
         dense
       >
 
-      <p>Name: {{ user.name }}</p>    
+       <p>Name: {{ user.name }}</p>   
       
         <v-subheader>Events</v-subheader>
         <v-list-tile>
@@ -80,7 +81,7 @@
           align-center
         >
 
-          <router-view></router-view>
+          <!--<router-view></router-view>-->
           
 
         </v-layout>
@@ -98,19 +99,26 @@
   import router from "../../router.js"   
 
   export default {
+
+
+    name: "Login",
     data: () => ({
       drawer: null,
       user: {    
         name: "matias"    
       } 
     }),
+    
     props: {
       source: String
     },
+    mounted() {
+      this.getUserData();
+    }, 
     methods: {    
-      getUserData: function() {    
+      getUserData() {
         let self = this    
-        axios.get("/api/user")    
+        axios.get("/api/login/user")    
         .then((response) => {    
           console.log(response)    
           self.$set(this, "user", response.data.user)    
@@ -120,11 +128,10 @@
           router.push("/")    
         })    
       }    
-    },
-    mounted() {    
-      this.getUserData()    
-    }  
+    }
+     
   }
+
 
 
 </script>
