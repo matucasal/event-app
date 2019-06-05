@@ -1,12 +1,20 @@
 <template>  
     <div>    
+
+<router-link tag="li" to="/register">
+  <a>Register</a>
+</router-link>
+
         <h2>Login</h2>    
         <form v-on:submit="login">    
-            <input type="text" name="email" /><br>    
-            <input type="password" name="password" /><br>    
+            Username: <input type="text" name="username" /><br>    
+            Password: <input type="password" name="password" /><br>    
             <input type="submit" value="Login" />    
         </form>    
     </div>
+
+
+    
 </template>
 
 <script>  
@@ -17,12 +25,12 @@
         methods: {    
             login: (e) => {    
                 e.preventDefault()    
-                let email = "mcasal"   
-                let password = "123"    
+                let username = ""   
+                let password = ""    
                 let login = () => {    
                     let data = {    
-                        email: email,    
-                        password: password    
+                        username: e.target.elements.username.value,    
+                        password: e.target.elements.password.value    
                     }    
                     axios.post("/api/login", data)    
                         .then((response) => {    

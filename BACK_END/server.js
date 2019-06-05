@@ -3,12 +3,10 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session')
 var path = require('path');
-const passport = require('passport')
+const passport = require('passport');
 
-// getting the local authentication type
-const LocalStrategy = require('passport-local').Strategy
 
-const db = mongoose.connect('mongodb://localhost:27017/eventsdb');
+const db = mongoose.connect('mongodb://localhost:27017/eventapp');
 const app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -23,9 +21,10 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
-//Inicializo el passort
+
+
+
 app.use(passport.initialize());
-//Start the session 
 app.use(passport.session());
 
 
@@ -60,49 +59,3 @@ const loginRouter = require("./Routes/loginRouter");
 app.use('/api/Login', loginRouter);
 
 
-//Esto despues lo saco a un lugar mas prolijo
-
-let users = [
-  {
-    id: 1,
-    name: "mcasal",
-    email: "mcasal",
-    password: "123"
-  },
-  {
-    id: 2,
-    name: "Emma",
-    email: "emma@email.com",
-    password: "password2"
-  }
-]
-
-
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password'
-}, 
-(username, password, done) => {
-    let user = users.find((user) => {
-        return user.email === username && user.password === password
-    })
-    
-    if (user) {
-        done(null, user)
-    } else {
-        done(null, false, {message: 'Incorrect username or password'})
-    }
-}
-))
-
-passport.serializeUser((user, done) => {
-done(null, user.id)
-})
-
-passport.deserializeUser((id, done) => {
-let user = users.find((user) => {
-    return user.id === id
-})
-
-done(null, user)
-})

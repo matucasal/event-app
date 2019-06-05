@@ -15,6 +15,7 @@ import FormUser from './components/Users/FormUser/index.vue'
 import ListUser from './components/Users/ListUser/index.vue'
 
 import Login from './components/Login/index.vue'
+import Register from './components/Register/index.vue'
 
 Vue.use(VueRouter);
 
@@ -42,7 +43,17 @@ let router = new VueRouter({
         /*meta: { 
             guest: true
         }*/
-    },
+    }
+    ,
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        /*meta: { 
+            guest: true
+        }*/
+    }
+    ,
     {
         path: '/layout',
         name: 'layout',

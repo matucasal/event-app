@@ -14,8 +14,10 @@
         dense
       >
 
-       <p>Name: {{ user.name }}</p>   
-      
+        <p>Name: {{ user.name }}</p>   
+        
+        <a href="#" v-on:click="callLogout">Logout</a>  
+
         <v-subheader>Events</v-subheader>
         <v-list-tile>
             <v-list-tile-action>
@@ -97,6 +99,7 @@
 
   import axios from "axios"    
   import router from "../../router.js"   
+  import logout from "../../logout.js"
 
   export default {
 
@@ -113,7 +116,7 @@
       source: String
     },
     mounted() {
-      this.getUserData();
+      //this.getUserData();
     }, 
     methods: {    
       getUserData() {
@@ -127,7 +130,10 @@
           console.log(errors)    
           router.push("/")    
         })    
-      }    
+      },
+      callLogout(){
+        logout.logout();
+      }  
     }
      
   }
