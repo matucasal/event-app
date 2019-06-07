@@ -16,7 +16,7 @@
 
         <p>Name: {{ user.name }}</p>   
         
-        <a href="#" v-on:click="callLogout">Logout</a>  
+        <a href="#" v-on:click="logout">Logout</a>  
 
         <v-subheader>Events</v-subheader>
         <v-list-tile>
@@ -84,7 +84,7 @@
         >
 
           <!--<router-view></router-view>-->
-          
+          <router-view name="content"></router-view>
 
         </v-layout>
       </v-container>
@@ -99,8 +99,7 @@
 
   import axios from "axios"    
   import router from "../../router.js"   
-  import logout from "../../logout.js"
-
+  
   export default {
 
 
@@ -133,6 +132,12 @@
       },
       callLogout(){
         logout.logout();
+      },
+      logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
       }  
     }
      

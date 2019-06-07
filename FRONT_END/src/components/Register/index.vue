@@ -18,22 +18,22 @@
     export default {    
         name: "Register",    
         methods: {    
-            register: (e) => {    
+            register: function (e) {    
                 e.preventDefault()    
                 let username = ""   
                 let password = ""  
                 let edad = 0
                 let nombre = ""  
                 let apellido = ""
-                let register = () => {    
-                    let data = {    
+                
+                let data = {    
                         username: e.target.elements.username.value,    
                         password: e.target.elements.password.value,
                         edad: e.target.elements.edad.value,
                         nombre: e.target.elements.nombre.value,
                         apellido: e.target.elements.apellido.value    
-                    }    
-                    axios.post("/api/login/signup", data)    
+                }    
+                    /*axios.post("/api/login/signup", data)    
                         .then((response) => {    
                             console.log("registered")    
                             //si sale bien lo mango al dashboard
@@ -42,9 +42,12 @@
                         .catch((errors) => {   
                             console.log(data) ;
                             console.log("Cannot register")    
-                        })    
-                }    
-                register()    
+                        }) */  
+                this.$store.dispatch('register', data)
+                .then(() => this.$router.push('/layout'))
+                .catch(err => console.log(err)) 
+                   
+                //register()    
             }    
         }    
     }

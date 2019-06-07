@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session')
 var path = require('path');
 const passport = require('passport');
+const passportConf = require('./passport');
 
 
 const db = mongoose.connect('mongodb://localhost:27017/eventapp');

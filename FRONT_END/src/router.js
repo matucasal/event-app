@@ -1,21 +1,19 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 
-//import Layout from "./components/Layout/index.vue";
 import Layout from "./components/Layout/index.vue"
 import HelloWorld from './components/HelloWorld/index.vue'
 
-
-import Events from './components/Events/index.vue'
 import FormEvents from './components/Events/FormEvent/index.vue'
 import ListEvents from './components/Events/ListEvent/index.vue'
 
-import Users from './components/Users/index.vue'
 import FormUser from './components/Users/FormUser/index.vue'
 import ListUser from './components/Users/ListUser/index.vue'
 
 import Login from './components/Login/index.vue'
 import Register from './components/Register/index.vue'
+
+import store from './store.js'
 
 Vue.use(VueRouter);
 
@@ -32,9 +30,9 @@ let router = new VueRouter({
         path: '/',
         name: 'HelloWorld',
         component: HelloWorld,
-        /*meta: { 
-            guest: true
-        }*/
+        meta: { 
+            requiresAuth: true
+        }
     },
     {
         path: '/login',
@@ -57,78 +55,58 @@ let router = new VueRouter({
     {
         path: '/layout',
         name: 'layout',
-        component: Layout
-    }
-    ,{
-        path: '/events',
-        component: Events,
-        children: [
-        {
-            name: 'FormEvent',
-            path: '/form-event',
-            component: FormEvents
+        component: Layout,
+        meta: { 
+            requiresAuth: true
         },
-        {
+        children: [
+            {
             name: 'ListEvent',
             path: '/list-event',
-            component: ListEvents
-        }
-    ]
-    },
-   
-    {
-      path: '/users',
-      component: Users,
-      children: [
-      {
-          name: 'FormUser',
-          path: '/form-user',
-          component: FormUser
-      },
-      {
-          name: 'ListUser',
-          path: '/list-user',
-          component: ListUser
-      }
-  ]
-  }
-
+            //component: ListEvents
+            components: {
+                //default: ListEvents,
+                content: ListEvents
+            }
+            },
+            {
+                name: 'FormEvent',
+                path: '/form-event',
+                components: {
+                    //default: ListEvents,
+                    content: FormEvents
+                }
+            },{
+                name: 'FormUser',
+                path: '/form-user',
+                components: {
+                    content: FormUser
+                }
+            },
+            {
+                name: 'ListUser',
+                path: '/list-user',
+                components: {
+                    content: ListUser
+                } 
+            }
+        ]
+    }
   ]
 })
 
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-      if (localStorage.getItem('jwt') == null) {
-        next({
-          path: '/login',
-          params: { nextUrl: to.fullPath }
-        })
-      } else {
-        let user = JSON.parse(localStorage.getItem('user'))
-        if(to.matched.some(record => record.meta.is_admin)) {
-          if(user.is_admin == 1){
-              next()
-          }
-          else{
-              next({ name: 'userboard'})
-          }
-        }
-        else {
-            next()
-        }
+      if (store.getters.isLoggedIn) {
+        next()
+        return
       }
-    } else if(to.matched.some(record => record.meta.guest)) {
-          if(localStorage.getItem('jwt') == null){
-              next()
-          }
-          else{
-              next({ name: 'userboard'})
-          }
-      }else {
+      next('/login') 
+    } else {
       next() 
     }
   })
-
+  
 
   export default router

@@ -23,10 +23,11 @@
     export default {    
         name: "Login",    
         methods: {    
-            login: (e) => {    
+            login: function (e) {  
                 e.preventDefault()    
-                let username = ""   
-                let password = ""    
+                /*
+                //let username = ""   
+                //let password = ""    
                 let login = () => {    
                     let data = {    
                         username: e.target.elements.username.value,    
@@ -42,7 +43,13 @@
                             console.log("Cannot log in")    
                         })    
                 }    
-                login()    
+                login()  */  
+                let username = e.target.elements.username.value 
+                let password = e.target.elements.password.value 
+                   
+                this.$store.dispatch('login', { username, password })
+		   		.then(() => this.$router.push('/layout'))
+		   		.catch(err => console.log(err))
             }    
         }    
     }

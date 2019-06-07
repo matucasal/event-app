@@ -2,7 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import Vuetify from 'vuetify';
 import router from './router.js';
-import axios from 'axios';
+import store from './store.js';
+
 
 import 'vuetify/dist/vuetify.min.css'
 
@@ -16,8 +17,15 @@ Vue.config.productionTip = false;
 Vue.use(Vuetify);
 Vue.use(router);
 
+//Laburo con el token aca
+const token = localStorage.getItem('user-token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
+
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");
 
