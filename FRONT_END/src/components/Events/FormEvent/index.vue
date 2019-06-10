@@ -1,65 +1,97 @@
+
+
 <template>
-<v-form v-model="valid">
-    <v-container>
-      <v-layout>
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="First name"
-            required
-          ></v-text-field>
-        </v-flex>
+  <div class="form pt-10">
+    <div class="summary text-red" v-if="$v.form.$error">
+      Form has errors
+    </div>
+    <form @submit.prevent="submit">
+      <div class="flex justify-center my-6">
+        <div
+           class="px-4"
+           :class="{ 'hasError': $v.form.nombre.$error }">
+          <label class="mr-2 font-bold text-grey">Nombre</label>
+          <input type="text" class="input" v-model="form.nombre">
+        </div>
+        <div
+           class="px-4"
+           :class="{ 'hasError': $v.form.direccion.$error }">
+          <label class="mr-2 font-bold text-grey">Direccion</label>
+          <input type="text" class="input" v-model="form.direccion">
+        </div>
+        <!-- <div
+           class="px-4"
+           :class="{ 'hasError': $v.form.fecha.$error }">
+          <label class="mr-2 font-bold text-grey">Fecha</label>
+          <input type="text" class="input" v-model="form.fecha">
+        </div>-->
+        <div
+           class="px-4"
+           :class="{ 'hasError': $v.form.fecha.$error }">
+         <label class="mr-2 font-bold text-grey">Fecha</label>
+          <!-- <input type="text" class="input" v-model="form.fecha"> -->
+         <Datepicker v-model="form.fecha" placeholder="Selecciona la fecha" class="input"  ></Datepicker>
+        </div>
 
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="lastname"
-            :rules="nameRules"
-            :counter="10"
-            label="Last name"
-            required
-          ></v-text-field>
-        </v-flex>
 
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          ></v-text-field>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+        <div
+           class="px-4"
+           :class="{ 'hasError': $v.form.precio.$error }">
+          <label class="mr-2 font-bold text-grey">Precio</label>
+          <input type="text" class="input" v-model="form.precio">
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="button">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
 </template>
 <script>
+import { required, email, minLength } from "vuelidate/lib/validators";
+import Datepicker from "vuejs-datepicker";
+
 export default {
-    data: () => ({
-      valid: false,
-      firstname: '',
-      lastname: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
-      ]
-    })
+  name: "FormEvent",
+
+  data() {
+    return {
+      form: {
+        nombre: "",
+        precio: "",
+        fecha: "",
+        direccion: ""
+      }
+    };
+  },
+
+  components: {
+    Datepicker
+  },
+
+  validations: {
+    form: {
+      nombre: { required, min: minLength(5) },
+      direccion: { required},
+      fecha: { required},
+      precio: { required}
+      //email: { required, email }
+    }
+  },
+
+  methods: {
+    submit() {
+      this.$v.form.$touch();
+      if(this.$v.form.$error) return
+      // to form submit after this
+      console.log(this.$v.form.$model.fecha);
+      //Ahora tengo que mandarlo por axios
+    }
   }
+};
 </script>
 
 

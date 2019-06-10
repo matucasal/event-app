@@ -1,10 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
 import Vuetify from 'vuetify';
+import Vuelidate from "vuelidate";
 import router from './router.js';
 import store from './store.js';
 
 
+import "./assets/styles/app.scss";
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false;
@@ -16,6 +18,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuetify);
 Vue.use(router);
+Vue.use(Vuelidate);
 
 //Laburo con el token aca
 const token = localStorage.getItem('user-token')
