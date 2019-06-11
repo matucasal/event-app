@@ -38,7 +38,7 @@
            class="px-4"
            :class="{ 'hasError': $v.form.precio.$error }">
           <label class="mr-2 font-bold text-grey">Precio</label>
-          <input type="text" class="input" v-model="form.precio">
+          <input type="number" class="input" v-model="form.precio">
         </div>
       </div>
       <div class="text-center">
@@ -53,6 +53,7 @@
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
 import Datepicker from "vuejs-datepicker";
+import axios from 'axios';
 
 export default {
   name: "FormEvent",
@@ -87,8 +88,19 @@ export default {
       this.$v.form.$touch();
       if(this.$v.form.$error) return
       // to form submit after this
-      console.log(this.$v.form.$model.fecha);
+      //console.log(this.$v.form.$model.fecha);
+      //console.log(this.$v.form.);
       //Ahora tengo que mandarlo por axios
+      let fecha = this.$v.form.$model.fecha
+      let precio = this.$v.form.$model.precio
+      let nombre = this.$v.form.$model.nombre
+      let direccion = this.$v.form.$model.direccion
+
+      axios({url: '/api/Events', data: { fecha, precio, nombre,direccion }, method: 'POST' })
+      .then(resp => {
+        console.log ( "Agrego el evento");
+      })
+
     }
   }
 };

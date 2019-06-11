@@ -25,15 +25,19 @@ module.exports = {
     },
 
     editEvent: async (req, res, next) => {
-        //cargo todos los datos del evento
-        event.nombre = req.body.nombre;
-        event.direccion = req.body.direccion;
-        event.fecha = req.body.fecha;
-        event.foto = req.body.foto;
-        event.precio =   req.body.precio;
-        event.descripcion =   req.body.descripcion;
-        event.save();
-        res.json(event);
+
+        Event.findById(req.params.eventId, (err, event) => {
+            //cargo todos los datos del evento
+            event.nombre = req.body.nombre;
+            event.direccion = req.body.direccion;
+            event.fecha = req.body.fecha;
+            event.foto = req.body.foto;
+            event.precio =   req.body.precio;
+            event.descripcion =   req.body.descripcion;
+            event.save();
+            res.json(event);
+        }) 
+     
     },
 
     patchEvent: async (req, res, next) => {

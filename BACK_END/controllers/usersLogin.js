@@ -49,7 +49,7 @@ module.exports = {
     const token = signToken(req.user);
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    res.send(JSON.stringify({ name: req.user.usernamename, token: token }, null, 3));
+    res.send(JSON.stringify({ user: req.user, token: token }, null, 3));
   },
 
   googleOAuth: async (req, res, next) => {
