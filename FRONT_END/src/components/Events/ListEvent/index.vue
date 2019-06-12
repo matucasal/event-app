@@ -147,6 +147,10 @@
               color="green"
               @click="eventAsistants(item._id)"
               >Ver asistentes</v-btn>
+              <v-btn 
+              color="red"
+              @click="deleteEvent(item._id)"
+              >Borrar evento</v-btn>
             </v-card-actions>
           </v-card>
     </v-flex>

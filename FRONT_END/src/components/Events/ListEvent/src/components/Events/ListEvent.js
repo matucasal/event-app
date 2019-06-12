@@ -109,6 +109,27 @@ export default {
 
     },
 
+    deleteEvent (id){
+      this.listUsersdialog = true;
+      console.log("Toco este id :" + id)
+      eventApi.deleteEvent(id)
+      .then(response => {
+        //this.todo = response
+        return response
+      }).then(data => {
+        //this.editedIndex = data._id
+        //this.editedEvent = Object.assign({}, data)
+        //this.dialog = true
+        //aca tengo que ver que hacer todavia
+        //this.usersInEvent = Object.assign({}, data)
+        console.log("se borro el evento")
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    },
+
     closeEventAsistantsDialog(){
       this.listUsersdialog = false
       this.usersInEvent = ''

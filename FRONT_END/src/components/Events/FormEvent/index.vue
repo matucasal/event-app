@@ -5,6 +5,15 @@
     <div class="summary text-red" v-if="$v.form.$error">
       Form has errors
     </div>
+
+    <v-alert
+    :value="alerteventadded"
+    type="success"
+    transition="scale-transition"
+    >
+    Se agrego el evento correctamente
+    </v-alert>
+
     <form @submit.prevent="submit">
       <div class="flex justify-center my-6">
         <div
@@ -65,7 +74,8 @@ export default {
         precio: "",
         fecha: "",
         direccion: ""
-      }
+      },
+      alerteventadded : false
     };
   },
 
@@ -99,6 +109,10 @@ export default {
       axios({url: '/api/Events', data: { fecha, precio, nombre,direccion }, method: 'POST' })
       .then(resp => {
         console.log ( "Agrego el evento");
+        this.alerteventadded = true
+        setTimeout(() => {
+          this.alerteventadded = false
+        }, 1000)
       })
 
     }
