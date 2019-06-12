@@ -42,6 +42,15 @@ export default {
     .then(response => {
       return response.data
     })
-  }
+  },
+
+  deleteEvent (id,data) {
+    console.log ("data")
+    console.log(data)
+    return axios ({url: '/api/Events/' + id, data: data, method: 'DELETE' })
+      .then(response => {
+        return response.data
+      })
+  },
 
 }
