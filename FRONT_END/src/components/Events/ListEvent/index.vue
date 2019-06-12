@@ -34,6 +34,15 @@
       Se asistió al evento correctamente
       </v-alert>
 
+      <v-alert
+      :value="alerteventdelete"
+      type="error"
+      transition="scale-transition"
+      >
+      Se borró el evento
+      </v-alert>
+      
+
     <v-layout row wrap>
 
       

@@ -8,6 +8,7 @@ export default {
       formDialog: false,
       alerteventasist: false,
       alerteventedit: false,
+      alerteventdelete : false,
       listUsersdialog: false,
       editedEvent: {
         nombre: '',
@@ -110,24 +111,16 @@ export default {
     },
 
     deleteEvent (id){
-      this.listUsersdialog = true;
-      console.log("Toco este id :" + id)
       eventApi.deleteEvent(id)
-      .then(response => {
-        //this.todo = response
-        return response
-      }).then(data => {
-        //this.editedIndex = data._id
-        //this.editedEvent = Object.assign({}, data)
-        //this.dialog = true
-        //aca tengo que ver que hacer todavia
-        //this.usersInEvent = Object.assign({}, data)
-        console.log("se borro el evento")
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      // no hace falta ver el resposne
+      this.getEvents()
+      this.alerteventdelete = true
+      setTimeout(() => {
+        this.alerteventdelete = false
+      }, 1000)
 
+      console.log("se borro el evento")
+       
     },
 
     closeEventAsistantsDialog(){

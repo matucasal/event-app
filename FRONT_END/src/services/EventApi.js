@@ -21,8 +21,6 @@ export default {
   },
 
   updateEvent (id,data) {
-    console.log ("data")
-    console.log(data)
     return axios ({url: '/api/Events/' + id, data: data, method: 'POST' })
       .then(response => {
         return response.data
@@ -30,7 +28,6 @@ export default {
   },
 
   asistEvent (id, user_id){
-    console.log("estoy en asistEvent")
     return axios ({url: '/api/Events/' + id + '/' + user_id, method: 'POST' })
       .then(response => {
         return response.data
@@ -45,8 +42,6 @@ export default {
   },
 
   deleteEvent (id,data) {
-    console.log ("data")
-    console.log(data)
     return axios ({url: '/api/Events/' + id, data: data, method: 'DELETE' })
       .then(response => {
         return response.data
