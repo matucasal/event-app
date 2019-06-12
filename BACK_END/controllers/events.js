@@ -67,19 +67,16 @@ module.exports = {
     },
 
     getUsersByEvent: async (req, res, next) => {
+        console.log ("El parametro es: " + req.params.eventId );
         Event.findById(req.params.eventId)
         .populate('users')
         .exec(function (err, users) {
-            console.log(users);
-            //console.log(users.users);
             //tendria que iterar users.users y armar un json piola
             var users_array =  [];
             for (var i =0; i< users.users.length ; i++){
                 //users_array.push (id1: 100)
-                users_array.push({nombre : users.users[i].nombre, apellido : users.users[i].apellido});
+                users_array.push({username: users.users[i].username, nombre : users.users[i].nombre, apellido : users.users[i].apellido});
             }
-            //res.json({"nombre": users.users.nombre, "apellido": users.users.apellido});
-            //res.json(users.nombre);
             res.json (users_array);
         })
     },

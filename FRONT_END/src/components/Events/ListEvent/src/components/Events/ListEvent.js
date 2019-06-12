@@ -3,10 +3,12 @@ import Datepicker from "vuejs-datepicker";
 export default {
   data () {
     return {
+      usersInEvent: null,
       todo: null,
-      dialog: false,
+      formDialog: false,
       alerteventasist: false,
       alerteventedit: false,
+      listUsersdialog: false,
       editedEvent: {
         nombre: '',
         precio: 0,
@@ -58,7 +60,7 @@ export default {
       }).then(data => {
         this.editedIndex = data._id
         this.editedEvent = Object.assign({}, data)
-        this.dialog = true
+        this.formDialog = true
       })
       .catch(error => {
         console.log(error)
@@ -84,8 +86,37 @@ export default {
       })
 
     },
+
+
+    eventAsistants(id) {
+      this.listUsersdialog = true;
+      console.log("Toco este id :" + id)
+      eventApi.fetchEventAsistans(id)
+      .then(response => {
+        //this.todo = response
+        return response
+      }).then(data => {
+        //this.editedIndex = data._id
+        //this.editedEvent = Object.assign({}, data)
+        //this.dialog = true
+        //aca tengo que ver que hacer todavia
+        this.usersInEvent = Object.assign({}, data)
+        console.log(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    },
+
+    closeEventAsistantsDialog(){
+      this.listUsersdialog = false
+      this.usersInEvent = ''
+
+    },
+
     close () {
-      this.dialog = false
+      this.formDialog = false
       setTimeout(() => {
         this.editedEvent = Object.assign({}, this.defaultItem)
         this.editedIndex = -1

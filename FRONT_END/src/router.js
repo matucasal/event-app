@@ -61,13 +61,16 @@ let router = new VueRouter({
         },
         children: [
             {
-            name: 'ListEvent',
-            path: '/list-event',
-            //component: ListEvents
-            components: {
-                //default: ListEvents,
-                content: ListEvents
-            }
+                name: 'ListEvent',
+                path: '/list-event',
+                //component: ListEvents
+                components: {
+                    //default: ListEvents,
+                    content: ListEvents
+                },
+                meta: { 
+                    requiresAuth: true
+                }
             },
             {
                 name: 'FormEvent',
@@ -75,14 +78,17 @@ let router = new VueRouter({
                 components: {
                     //default: ListEvents,
                     content: FormEvents
+                },
+                meta: { 
+                    requiresAuth: true
                 }
-            },{
+            },/*{
                 name: 'FormUser',
                 path: '/form-user',
                 components: {
                     content: FormUser
                 }
-            },
+            },*/
             {
                 name: 'ListUser',
                 path: '/list-user',
@@ -97,6 +103,7 @@ let router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+    
     if(to.matched.some(record => record.meta.requiresAuth)) {
       if (store.getters.isLoggedIn) {
         next()

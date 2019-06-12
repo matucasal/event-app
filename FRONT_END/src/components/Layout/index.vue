@@ -45,7 +45,7 @@
 
 
         <v-subheader>Usuarios</v-subheader>
-
+        <!--
          <v-list-tile>
           <v-list-tile-action>
             <v-icon>person_add</v-icon>
@@ -56,8 +56,8 @@
             </router-link>
           </v-list-tile-content>
         </v-list-tile>
-
-         <v-list-tile>
+        -->
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>list</v-icon>
           </v-list-tile-action>

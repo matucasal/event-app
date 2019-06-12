@@ -35,6 +35,13 @@ export default {
       .then(response => {
         return response.data
       })
+  },
+
+  fetchEventAsistans (id){
+    return axios ({url: '/api/Events/' + id + '/users', method: 'GET' })
+    .then(response => {
+      return response.data
+    })
   }
 
 }

@@ -7,7 +7,7 @@ const eventModel = new Schema({
     precio: {type: Number},
     descripcion: {type: String},
     //guardo un array de usuarios que son los que asistiran al evento
-    users : [{ type: Schema.Types.ObjectId, ref: 'usuario' }]
+    users : [{ type: Schema.Types.ObjectId, ref: 'users' }]
 })
 
 

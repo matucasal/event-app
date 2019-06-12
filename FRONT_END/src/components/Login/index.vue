@@ -25,25 +25,7 @@
         methods: {    
             login: function (e) {  
                 e.preventDefault()    
-                /*
-                //let username = ""   
-                //let password = ""    
-                let login = () => {    
-                    let data = {    
-                        username: e.target.elements.username.value,    
-                        password: e.target.elements.password.value    
-                    }    
-                    axios.post("/api/login", data)    
-                        .then((response) => {    
-                            console.log("Logged in")    
-                            //si sale bien lo mango al dashboard
-                            router.push("/layout")    
-                        })    
-                        .catch((errors) => {    
-                            console.log("Cannot log in")    
-                        })    
-                }    
-                login()  */  
+                
                 let username = e.target.elements.username.value 
                 let password = e.target.elements.password.value 
                    
