@@ -102,7 +102,6 @@
                   <v-list-tile
                   :key="index"
                   avatar
-                  @click=""
                   >
                   <v-list-tile-avatar>
                   <img :src="user.avatar">
