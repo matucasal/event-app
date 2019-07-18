@@ -1,18 +1,4 @@
 <template>
-<!--
-<div>
-
-    <h1>Bitcoin Price Index</h1>
-  <div  v-for="item in todo" class="todo" :key = "item">
-    {{ item.id }}:
-    <span class="lighten">
-      
-    </span>
-  </div>
-  
-
-</div>
--->
 
 
 
@@ -41,17 +27,12 @@
       >
       Se borró el evento
       </v-alert>
-      
-
-    <v-layout row wrap>
-
-      
 
 
-    <v-flex xs12
+    <!-- <v-flex xs12
       v-for="(item, index) in todo"
       :key="index"
-      mb-2>
+      mb-2> -->
         <!-- Este el dialog del form -->
         <v-dialog v-model="formDialog" max-width="500px">
             <!-- <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn> -->
@@ -88,6 +69,36 @@
             </v-card>
         </v-dialog>
 
+
+
+        <!-- Este el dialog del form para agregar foto al evento-->
+        <v-dialog v-model="imageEventDialog" max-width="500px">
+            <!-- <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn> -->
+            <v-card>
+            <v-card-title>
+            <span class="headline">Agregar imagen al evento</span>
+            </v-card-title>
+
+            <v-card-text>
+            <v-container grid-list-md>
+            <v-layout wrap>
+                <div class="large-12 medium-12 small-12 cell">
+                <label>File
+                <input type="file" id="file" ref="file" v-on:change="onImageSelect()"/>
+                </label>
+                </div>
+            </v-layout>
+            </v-container>
+            </v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click.native="addImageToEvent">Save</v-btn>
+            </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+
+
         <!-- Este es el dialog del listado de usuarios-->
         <v-dialog v-model="listUsersdialog" scrollable max-width="300px">
               <v-card>
@@ -95,10 +106,8 @@
                 <v-divider></v-divider>
                 <v-card-text style="height: 300px;">
                 <!-- aca armo la lista -->
-                <v-list three-line>
+                <v-list >
                   <template v-for="(user, index) in usersInEvent" >
-                 
-
                   <v-list-tile
                   :key="index"
                   avatar
@@ -126,45 +135,58 @@
               </v-card>
           </v-dialog>
 
+          <v-layout row wrap>
+            <v-flex 
+            v-for="(item, index) in todo"
+            :key="index"
+            xs12>
+            <v-card>
+              <v-layout>
+                <v-flex xs5>
+                  <v-img
+                    :src="`${item.image}`"
+                    height="125px"
+                    contain
+                  ></v-img>
+                </v-flex>
+                <v-flex xs7>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline">{{item.nombre}}</div>
+                      <div>{{item.fecha}}</div>
+                      <div>{{item.precio}}</div>
+                      <div>{{item.direccion}}</div>
+                    </div>
+                  </v-card-title>
+                </v-flex>
+              </v-layout>
+              <v-divider light></v-divider>
+              <v-card-actions class="justify-center" width="50%">
+                <v-btn 
+                color="green"
+                @click="editEvent(item._id)"
+                >Editar</v-btn>
+                <v-btn 
+                color="green"
+                @click="asistEvent(item._id,$store.getters.user._id)"
+                >Asistir</v-btn>
+                <v-btn 
+                color="green"
+                @click="eventAsistants(item._id)"
+                >Ver asistentes</v-btn>
+                <v-btn 
+                color="green"
+                @click="showAddImageToEvent(item._id)"
+                >Agregar imagen</v-btn>
+                <v-btn 
+                color="red"
+                @click="deleteEvent(item._id)"
+                >Borrar evento</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+           </v-layout>
 
-        <v-card>
-          <v-img
-            :src="item.Poster"
-            aspect-ratio="1"
-          ></v-img>
-
-          <v-card-title primary-title class="justify-center">
-            <div>
-              <h2>{{item.nombre}}</h2>
-              <div>Fecha: {{item.fecha}}</div>
-              <div>Precio: {{item.precio}}</div>
-              <div>Direccion: {{item.direccion}}</div>
-            </div>
-          </v-card-title>
-
-            <v-card-actions class="justify-center" width="50%"> 
-            <v-btn 
-              color="green"
-              @click="editEvent(item._id)"
-              >Editar</v-btn>
-              <v-btn 
-              color="green"
-              @click="asistEvent(item._id,$store.getters.user._id)"
-              >Asistir</v-btn>
-              <v-btn 
-              color="green"
-              @click="eventAsistants(item._id)"
-              >Ver asistentes</v-btn>
-              <v-btn 
-              color="red"
-              @click="deleteEvent(item._id)"
-              >Borrar evento</v-btn>
-            </v-card-actions>
-          </v-card>
-    </v-flex>
-
-
-  </v-layout>
   </v-container>
 
 

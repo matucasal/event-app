@@ -2,13 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session')
+const cors = require ('cors');
 var path = require('path');
 const passport = require('passport');
 const passportConf = require('./passport');
 
 
+
 const db = mongoose.connect('mongodb://localhost:27017/eventapp');
 const app = express();
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -55,8 +58,15 @@ app.use('/api/Events', eventRouter);
 const userRouter = require("./Routes/userRouter");
 app.use('/api/Users', userRouter);
 
+
 //utilizo el router de login para manejar todos los metodos desde ahi
 const loginRouter = require("./Routes/loginRouter");
 app.use('/api/Login', loginRouter);
+
+
+
+//utilizo el router de photo para manejar todos los metodos desde ahi
+const imageRouter = require("./Routes/imageRouter");
+app.use('/api/Photo', imageRouter);
 
 

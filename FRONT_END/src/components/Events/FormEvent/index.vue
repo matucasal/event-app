@@ -49,6 +49,7 @@
           <label class="mr-2 font-bold text-grey">Precio</label>
           <input type="number" class="input" v-model="form.precio">
         </div>
+        
       </div>
       <div class="text-center">
         <button type="submit" class="button">
@@ -73,8 +74,10 @@ export default {
         nombre: "",
         precio: "",
         fecha: "",
-        direccion: ""
+        direccion: "",
+        file: ""
       },
+      file: "",
       alerteventadded : false
     };
   },
@@ -89,7 +92,7 @@ export default {
       direccion: { required},
       fecha: { required},
       precio: { required}
-      //email: { required, email }
+      //file: { required, file }
     }
   },
 
@@ -105,9 +108,10 @@ export default {
       let precio = this.$v.form.$model.precio
       let nombre = this.$v.form.$model.nombre
       let direccion = this.$v.form.$model.direccion
-
-      axios({url: '/api/Events', data: { fecha, precio, nombre,direccion }, method: 'POST' })
+     
+      axios({url: '/api/Events', data: { fecha, precio, nombre,direccion}, method: 'POST' })
       .then(resp => {
+        console.log(resp)
         console.log ( "Agrego el evento");
         this.alerteventadded = true
         setTimeout(() => {

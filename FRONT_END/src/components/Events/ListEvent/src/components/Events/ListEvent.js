@@ -1,5 +1,8 @@
 import eventApi from '@/services/EventApi'
 import Datepicker from "vuejs-datepicker";
+import axios from 'axios'
+
+
 export default {
   data () {
     return {
@@ -10,6 +13,7 @@ export default {
       alerteventedit: false,
       alerteventdelete : false,
       listUsersdialog: false,
+      imageEventDialog: false,
       editedEvent: {
         nombre: '',
         precio: 0,
@@ -22,6 +26,7 @@ export default {
         fecha:'',
         direccion: ''
       },
+      file: '',
       editedIndex: -1,
     }
   },
@@ -109,6 +114,32 @@ export default {
       })
 
     },
+    onImageSelect(){
+      const file = this.$refs.file.files[0];
+      this.file = file;
+      console.log ("file seleccionado")
+      console.log(this.file)
+    },
+
+    showAddImageToEvent(id){
+      this.imageEventDialog = true;
+      this.editedIndex = id;
+    },
+
+    addImageToEvent(){
+      this.imageEventDialog = true;
+      //Creo el form data que es para guardar archivos y le mando todo l ode siempre
+      let formData = new FormData();
+      formData.append('file', this.file);
+      axios.post( '/api/Events/' + this.editedIndex + '/image' ,formData).then(resp => {
+          console.log(resp)
+          console.log ( "Agrego la imagen el evento");
+          this.imageEventDialog = false
+
+      })
+
+
+    },
 
     deleteEvent (id){
       eventApi.deleteEvent(id)
@@ -128,6 +159,8 @@ export default {
       this.usersInEvent = ''
 
     },
+
+    
 
     close () {
       this.formDialog = false

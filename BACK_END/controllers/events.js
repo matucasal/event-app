@@ -1,5 +1,7 @@
 const Event = require('../models/eventModel');
 
+
+
 module.exports = {
     
     getEvents: async (req, res, next) => {
@@ -11,12 +13,26 @@ module.exports = {
     },
 
     addEvent: async (req, res,next) => {
+        
         let event = new Event(req.body); // edited line
-        console.log("Estoy en el post");
-        console.log(req.body);
         event.save()
         res.status(201).send(event)
     },
+
+    addImageIntoEvent: async (req, res,next) => {
+        console.log("tengo que agregar la imagen a este evento");
+        console.log (req.params.eventId);
+        console.log(req.file);
+
+        Event.findById(req.params.eventId, (err, event) => {
+            //cargo todos los datos del evento
+            //obtengo ruta del archivo para guardarla en la bd
+            event.image =  req.file.filename;
+            event.save();
+            res.json(event);
+        }) 
+
+    }, 
 
     getEvent: async (req, res, next) =>{
         Event.findById(req.params.eventId, (err, event) => {

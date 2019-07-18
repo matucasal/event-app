@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,8 @@ export default new Vuex.Store({
 		user : {}
 		//user : localStorage.getItem('user') || {}
 	},
+	plugins: [createPersistedState()],
+	
 	mutations: {
 		auth_request(state){
 	    	state.status = 'loading'

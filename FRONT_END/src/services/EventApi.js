@@ -28,7 +28,7 @@ export default {
   },
 
   asistEvent (id, user_id){
-    return axios ({url: '/api/Events/' + id + '/' + user_id, method: 'POST' })
+    return axios ({url: '/api/Events/' + id + '/users/' + user_id, method: 'POST' })
       .then(response => {
         return response.data
       })
