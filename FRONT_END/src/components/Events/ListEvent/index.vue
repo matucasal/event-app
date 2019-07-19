@@ -113,7 +113,12 @@
                   avatar
                   >
                   <v-list-tile-avatar>
-                  <img :src="user.avatar">
+                  
+                  <v-img
+                    :src="`http://localhost:5656/api/photo/avatars/${user.avatar}`"
+                    height="125px"
+                    contain
+                  ></v-img>
                   </v-list-tile-avatar>
 
                   <v-list-tile-content>

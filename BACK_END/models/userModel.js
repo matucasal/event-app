@@ -9,7 +9,8 @@ const userModel = new Schema({
     username: {type: String},
     password: { 
         type: String},
-    events : [{ type: Schema.Types.ObjectId, ref: 'evento' }]
+    events : [{ type: Schema.Types.ObjectId, ref: 'evento' }],
+    avatar: {type: String}
 
 })
 

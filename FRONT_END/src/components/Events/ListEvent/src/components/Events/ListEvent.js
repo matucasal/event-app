@@ -74,6 +74,8 @@ export default {
 
     }
     ,asistEvent (id, user_id) {
+      console.log (id)
+      console.log(user_id)
       eventApi.asistEvent(id,user_id)
       .then(response => {
         console.log("Asisti bien al evento")

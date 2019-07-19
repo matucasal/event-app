@@ -91,7 +91,7 @@ module.exports = {
             var users_array =  [];
             for (var i =0; i< users.users.length ; i++){
                 //users_array.push (id1: 100)
-                users_array.push({username: users.users[i].username, nombre : users.users[i].nombre, apellido : users.users[i].apellido});
+                users_array.push({username: users.users[i].username, nombre : users.users[i].nombre, apellido : users.users[i].apellido,avatar : users.users[i].avatar});
             }
             res.json (users_array);
         })

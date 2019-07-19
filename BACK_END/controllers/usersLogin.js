@@ -13,6 +13,10 @@ signToken = user => {
 
 module.exports = {
   signUp: async (req, res, next) => {
+
+    console.log(req.body)
+    //console.log(req.body.data)
+        
     
     //Tomo los datos del request
     const { username, password,nombre,apellido,edad } = req.body;
@@ -31,7 +35,8 @@ module.exports = {
       username : username,
       nombre: nombre,
       apellido: apellido,
-      edad: edad
+      edad: edad,
+      avatar: req.file.filename
     });
 
     await newUser.save();
@@ -40,7 +45,8 @@ module.exports = {
     // Generate the token
     const token = signToken(newUser);
     // Respond with token
-    res.status(200).json({ token });
+    //res.status(200).json({ token });
+    res.send(JSON.stringify({ user: newUser, token: token }, null, 3));
   },
 
   signIn: async (req, res, next) => {

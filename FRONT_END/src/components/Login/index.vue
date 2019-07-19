@@ -26,14 +26,14 @@
 
     <!-- Register Form -->
     <!-- Div que uso para mostrar o no mostrar el login form-->
-    <div v-if="formRegister">
+    <div id="register-form" v-if="formRegister">
         <form  v-on:submit="register">
             <input type="text" id="login" class="fadeIn first" name="username" placeholder="username">
             <input type="password" id="password" class="fadeIn first" name="password" placeholder="password">
             <input type="number" id="edad" class="fadeIn first" name="edad" placeholder="edad">
             <input type="text" id="nombre" class="fadeIn first" name="nombre" placeholder="nombre">
             <input type="text" id="apellido" class="fadeIn first" name="apellido" placeholder="apellido">
-
+            <input type="file" id="file" ref="file" v-on:change="onImageSelect()"/>
             <input type="submit" class="fadeIn fourth" value="Register">
         </form> 
     </div>
@@ -76,13 +76,15 @@
                 let edad = 0
                 let nombre = ""  
                 let apellido = ""
+                let file = ""
                 
                 let data = {    
                     username: e.target.elements.username.value,    
                     password: e.target.elements.password.value,
                     edad: e.target.elements.edad.value,
                     nombre: e.target.elements.nombre.value,
-                    apellido: e.target.elements.apellido.value    
+                    apellido: e.target.elements.apellido.value,
+                    file: e.target.elements.file.value    
                 }    
                     /*axios.post("/api/login/signup", data)    
                         .then((response) => {    
@@ -94,12 +96,26 @@
                             console.log(data) ;
                             console.log("Cannot register")    
                         }) */  
-                this.$store.dispatch('register', data)
+
+                let formData = new FormData();
+                formData.append('file', this.file);
+                formData.append ('username', e.target.elements.username.value)
+                formData.append ('password', e.target.elements.password.value)
+                formData.append ('edad', e.target.elements.edad.value)
+                formData.append ('nombre', e.target.elements.nombre.value)
+                formData.append ('apellido', e.target.elements.apellido.value)
+
+                this.$store.dispatch('register', formData)
                 .then(() => this.$router.push('/layout'))
                 .catch(err => console.log(err)) 
-                   
-                //register()    
-            }     
+            },
+            onImageSelect(){
+                const file = this.$refs.file.files[0];
+                this.file = file;
+                console.log ("file seleccionado")
+                console.log(this.file)
+            },
+    
         }    
     }
 </script>

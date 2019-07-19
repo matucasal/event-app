@@ -3,7 +3,19 @@ const passport = require('passport');
 const passportJWT = passport.authenticate('jwt', { session: false });
 const passportSignIn = passport.authenticate('local', { session: false });
 const UsersLoginController = require('../controllers/usersLogin');
+const multer = require ('multer');
 
+// SET STORAGE
+var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'uploads/avatars')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+        }
+    })
+   
+var upload = multer({ storage: storage })
 
 /*
 const authMiddleware = (req, res, next) => {
@@ -15,7 +27,7 @@ const authMiddleware = (req, res, next) => {
 }*/
 
 loginRouter.route('/signup')
-  .post( UsersLoginController.signUp);
+  .post( upload.single('file'), UsersLoginController.signUp);
 
 
 loginRouter.route('/')

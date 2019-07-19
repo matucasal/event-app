@@ -13,7 +13,6 @@ module.exports = {
 
 
     addUser: async (req, res, net) => {
-
         let user = new User(req.body); // edited line
         console.log("Estoy en el post");
         console.log(req.body);
