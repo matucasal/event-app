@@ -42,6 +42,7 @@
          <Datepicker v-model="form.fecha" placeholder="Selecciona la fecha" class="input"  ></Datepicker>
         </div>
 
+   
 
         <div
            class="px-4"
@@ -52,9 +53,7 @@
         
       </div>
       <div class="text-center">
-        <button type="submit" class="button">
-          Submit
-        </button>
+          <input type="submit" value="Alta de evento">
       </div>
     </form>
   </div>

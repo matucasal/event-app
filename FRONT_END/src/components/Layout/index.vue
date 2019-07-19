@@ -72,7 +72,7 @@
 
 
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="#56baed" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
     </v-toolbar>
@@ -89,8 +89,8 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2017</span>
+    <v-footer color="#56baed" app>
+      <span class="white--text">&copy; Matías Casal - Fullstack 2019</span>
     </v-footer>
   </v-app>
 </template>
@@ -115,7 +115,7 @@
       source: String
     },
     mounted() {
-      //this.getUserData();
+      this.user.name = this.$store.getters.user.username
     }, 
     methods: {    
       getUserData() {

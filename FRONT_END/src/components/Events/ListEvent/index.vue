@@ -161,21 +161,22 @@
                 </v-flex>
               </v-layout>
               <v-divider light></v-divider>
+              <!-- botones -->
               <v-card-actions class="justify-center" width="50%">
                 <v-btn 
-                color="green"
+                color="secondary"
                 @click="editEvent(item._id)"
                 >Editar</v-btn>
                 <v-btn 
-                color="green"
+                color="secondary"
                 @click="asistEvent(item._id,$store.getters.user._id)"
                 >Asistir</v-btn>
                 <v-btn 
-                color="green"
+                color="secondary"
                 @click="eventAsistants(item._id)"
                 >Ver asistentes</v-btn>
                 <v-btn 
-                color="green"
+                color="secondary"
                 @click="showAddImageToEvent(item._id)"
                 >Agregar imagen</v-btn>
                 <v-btn 
