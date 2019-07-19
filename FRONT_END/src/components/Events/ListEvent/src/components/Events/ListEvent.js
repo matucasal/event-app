@@ -135,6 +135,7 @@ export default {
           console.log(resp)
           console.log ( "Agrego la imagen el evento");
           this.imageEventDialog = false
+          this.getEvents()
 
       })
 

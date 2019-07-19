@@ -144,7 +144,7 @@
               <v-layout>
                 <v-flex xs5>
                   <v-img
-                    :src="`${item.image}`"
+                    :src="`http://localhost:5656/api/photo/${item.image}`"
                     height="125px"
                     contain
                   ></v-img>

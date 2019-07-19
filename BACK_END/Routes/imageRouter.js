@@ -21,15 +21,9 @@ imageRouter.route('/:filename').get((req, res) => {
 
 
         fs.readFileSync(absolutePath);
-        res.writeHead(200, {'Content-Type':  'image/jpg' });
-        res.end(fileToload, 'binary');
-
-        if (err) return console.log(err)
-
-
-
-        res.contentType('image/jpeg');
-        res.send(result.image.buffer)
+        res.sendFile(absolutePath);
+        //res.writeHead(200, {'Content-Type':  'image/jpg' });
+        //res.send(fileToload, 'binary');
 
 
 })
